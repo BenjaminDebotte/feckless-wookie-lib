@@ -1,40 +1,28 @@
 package dao;
 
-import java.util.List;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import db.DbManagement;
 import model.Client;
 
 public class DbClientDao extends AClientDao {
 
-	public DbClientDao() {
-		
-		DbManagement dbManagement;
+	
+	public DbClientDao() throws SQLException {
+		refreshData();
 	}
 	
-	@Override
-	public int countClient() {
+	public void refreshData() throws SQLException {
+		// On récupère tous les clients, et on les stocke dans une hashmap
 		
+		ResultSet result = DbManagement.getInstance().query("SELECT count(*) FROM tabclient");
 		
-		return 0;
-	}
-
-	@Override
-	public List<Client> getClients() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Client> getByFullname(String nom, String prenom) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Client getById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		while(result.next()) {
+			int id = result.getInt("idNumClient");
+			Client client = new Client(id, result.getString("txtNomCli"), result.getString("txtPrenomCli"));
+			clientList.put(id, client);
+		}
 	}
 
 }
