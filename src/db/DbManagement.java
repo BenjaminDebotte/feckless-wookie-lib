@@ -5,11 +5,11 @@ import java.sql.SQLException;
 
 public class DbManagement implements IDbManagement {
 
-	private DbManagement instance = null;
-	private IDbManagement delegate = null;
+	private static DbManagement instance = null;
+	private static IDbManagement delegate = null;
 	
 	
-	public DbManagement getInstance() {
+	public static DbManagement getInstance() {
 		if(instance == null)
 			instance = new DbManagement();
 		return instance;
