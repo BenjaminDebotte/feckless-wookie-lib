@@ -20,20 +20,23 @@ public class DbManagement {
 		
 		initDBDrivers();
 		
-		// TODO Auto-generated method stub
 		final String NomBase = "jdbc:mysql://localhost/si";
 		final String User = "si";
 		final String Password = "Password1234";
 		Connection conn;
 		try {
-		conn = DriverManager.getConnection(NomBase, User, Password);
-		 // ou getConnection(NomBase+”?user=”+User+”&password=”+pass);
-		if (conn == null) {
-		System.out.println("Could not connect !!");
-		}
+			conn = DriverManager.getConnection(NomBase, User, Password);
+			if (conn == null) {
+				System.out.println("Could not connect !!");
+				return;
+			}
+			
+			System.out.println("Connection : Success.");
+			
 		} catch (SQLException e) {
-		System.err.println("Erreur de connexion " + e.getMessage ()) ;
+			System.err.println("Erreur de connexion " + e.getMessage ()) ;
 		}
+		
 	}
 	
 	
