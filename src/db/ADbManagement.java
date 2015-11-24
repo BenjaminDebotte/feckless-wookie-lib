@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.MissingResourceException;
 
-public class ADbManagement implements IDbManagement {
+public abstract class ADbManagement implements IDbManagement {
 
 	private Connection conn = null;
 	
