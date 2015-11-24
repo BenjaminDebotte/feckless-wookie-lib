@@ -9,6 +9,8 @@ public class DbManagement implements IDbManagement {
 	private static IDbManagement delegate = null;
 	
 	
+	private DbManagement() {}
+	
 	public static DbManagement getInstance() {
 		if(instance == null)
 			instance = new DbManagement();
