@@ -16,23 +16,23 @@ public class DbManagement implements IDbManagement {
 	}
 	
 	public void setDelegate(IDbManagement delegate) {
-		this.delegate = delegate;
+		DbManagement.delegate = delegate;
 	}
 
 	@Override
 	public void connexion(String bdd_path) throws SQLException {
-		this.delegate.connexion(bdd_path);
+		DbManagement.delegate.connexion(bdd_path);
 	}
 
 	@Override
 	public void deconnexion() {
-		this.delegate.deconnexion();
+		DbManagement.delegate.deconnexion();
 		
 	}
 
 	@Override
 	public ResultSet query(String query) throws SQLException {
-		return this.delegate.query(query);
+		return DbManagement.delegate.query(query);
 	}
 
 }
