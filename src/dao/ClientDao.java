@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import model.Client;
@@ -27,31 +28,32 @@ public class ClientDao implements IClientDao {
 	}
 	
 	public boolean isDelegated() {
+		
 		return !(delegate == null);
 	}
 	
 	@Override
-	public int countClient() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int countClient() throws SQLException {
+	
+		return delegate.countClient();
 	}
 
 	@Override
 	public List<Client> getClients() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return delegate.getClients();
 	}
 
 	@Override
-	public List<Client> getByFullname(String nom, String prenom) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Client> getByFullname(String familyName, String firstName) {
+		
+		return delegate.getByFullname(familyName, firstName);
 	}
 
 	@Override
 	public Client getById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return delegate.getById(id);
 	}
 
 }

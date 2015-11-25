@@ -1,14 +1,16 @@
 package dao;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import model.Client;
 
 public abstract class AClientDao implements IClientDao {
 
-	protected HashMap<Integer, Client> clientList;
+	protected Map<Integer, Client> clientList;
 	
 	public AClientDao() {
 		
@@ -18,26 +20,37 @@ public abstract class AClientDao implements IClientDao {
 	@Override
 	public int countClient() throws SQLException {
 		
-		
-		
-		return 0;
+		return clientList.size();
 	}
 
 	@Override
 	public List<Client> getClients() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		ArrayList<Client> clients = new ArrayList<Client>();
+		
+		for(Client client : clientList.values()) 
+			clients.add(client);
+		
+		return clients;
 	}
 
 	@Override
-	public List<Client> getByFullname(String nom, String prenom) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Client> getByFullname(String familyName, String firstName) {
+		
+		ArrayList<Client> clients = new ArrayList<Client>();
+		
+		for(Client client : clientList.values()) {
+			
+			if(client.getFamilyName().equals(familyName) && client.getFirstName().equals(firstName))
+				clients.add(client);				
+		}
+			
+		return clients;
 	}
 
 	@Override
 	public Client getById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return clientList.get(new Integer(id));
 	}
 }

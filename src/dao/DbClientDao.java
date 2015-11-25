@@ -16,7 +16,7 @@ public class DbClientDao extends AClientDao {
 	public void refreshData() throws SQLException {
 		// On récupère tous les clients, et on les stocke dans une hashmap
 		
-		ResultSet result = DbManagement.getInstance().query("SELECT count(*) FROM tabclient");
+		ResultSet result = DbManagement.getInstance().query("SELECT * FROM tabClient");
 		
 		while(result.next()) {
 			int id = result.getInt("idNumClient");
