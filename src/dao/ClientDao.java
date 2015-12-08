@@ -56,4 +56,10 @@ public class ClientDao implements IClientDao {
 		return delegate.getById(id);
 	}
 
+	@Override
+	public List<Client> getByName(String familyName) {
+		
+		return delegate.getByName(familyName);
+	}
+
 }

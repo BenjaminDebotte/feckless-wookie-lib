@@ -1,31 +1,31 @@
 package model;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Resultat {
 
-	private ArrayList<Client> clientList;
-	private ArrayList<Operation> operationList;
+	private List<Client> clientList;
+	private List<Operation> operationList;
 	
-	public Resultat(ArrayList<Client> clientList, ArrayList<Operation> operationList) {
+	public Resultat(List<Client> clientList, List<Operation> operationList) {
 		
 		this.clientList = clientList;
 		this.operationList = operationList;
 	}
 
-	public ArrayList<Client> getClientList() {
+	public List<Client> getClientList() {
 		return clientList;
 	}
 
-	public void setClientList(ArrayList<Client> clientList) {
+	public void setClientList(List<Client> clientList) {
 		this.clientList = clientList;
 	}
 
-	public ArrayList<Operation> getOperationList() {
+	public List<Operation> getOperationList() {
 		return operationList;
 	}
 
-	public void setOperationList(ArrayList<Operation> operationList) {
+	public void setOperationList(List<Operation> operationList) {
 		this.operationList = operationList;
 	}
 }

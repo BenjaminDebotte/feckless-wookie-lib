@@ -53,4 +53,19 @@ public abstract class AClientDao implements IClientDao {
 		
 		return clientList.get(new Integer(id));
 	}
+	
+	@Override
+	public List<Client> getByName(String familyName) {
+		
+ArrayList<Client> clients = new ArrayList<Client>();
+		
+		for(Client client : clientList.values()) {
+			
+			if(client.getFamilyName().equals(familyName))
+				clients.add(client);				
+		}
+		
+		return clients;
+		
+	}
 }
