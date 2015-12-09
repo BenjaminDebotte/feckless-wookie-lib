@@ -28,7 +28,7 @@ public class DbOperationDao implements IOperationDao {
 		Operation operation;
 		while(result.next()) {
 			
-			operation = new Operation(result.getInt("idNumOperation"), result.getString("idNumCarte"), result.getString("idNumCompte"), result.getString("numMontantOpe"), result.getString("dateope"));
+			operation = new Operation(result.getInt("idNumOperation"), result.getString("idNumCarte"), result.getString("idNumCompte"), result.getString("numMontantOpe"), result.getString("datOpe"));
 			operationList.add(operation);
 		}
 		
@@ -52,7 +52,17 @@ public class DbOperationDao implements IOperationDao {
 			client = clientIterator.next();
 			id = client.getId();
 			
-			result = DbManagement.getInstance().query("SELECT * FROM tabOperation WHERE idNumClient = " + id);
+			String queryString = "SELECT ope.* "+
+					  "FROM tabOperation ope "+
+					  "INNER JOIN relClientCompte cc ON cc.idNumCompte = ope.idNumCompte "+
+					  "INNER JOIN tabClient cl ON cl.idNumClient = cc.idNumClient "+
+					  "WHERE cl.idNumClient = '"+id+"' UNION "+
+					  "SELECT ope.* "+
+					  "FROM tabOperation ope "+
+					  "INNER JOIN tabCarte ca ON ca.idNumCarte = ope.idNumCarte "+
+					  "INNER JOIN tabClient cl ON cl.idNumClient = ca.idNumClient "+
+					  "WHERE cl.idNumClient = '"+id+"'";
+			result = DbManagement.getInstance().query(queryString);
 			while(result.next()) {
 				
 				operations.add(new Operation(result.getInt("idNumOperation"), result.getString("idNumCarte"), result.getString("idNumCompte"), result.getString("numMontantOpe"), result.getString("dateOpe")));
