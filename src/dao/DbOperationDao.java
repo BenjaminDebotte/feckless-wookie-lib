@@ -65,7 +65,7 @@ public class DbOperationDao implements IOperationDao {
 			result = DbManagement.getInstance().query(queryString);
 			while(result.next()) {
 				
-				operations.add(new Operation(result.getInt("idNumOperation"), result.getString("idNumCarte"), result.getString("idNumCompte"), result.getString("numMontantOpe"), result.getString("dateOpe")));
+				operations.add(new Operation(result.getInt("idNumOperation"), result.getString("idNumCarte"), result.getString("idNumCompte"), result.getString("numMontantOpe"), result.getString("datOpe")));
 			}
 		}
 		
@@ -94,7 +94,7 @@ public class DbOperationDao implements IOperationDao {
 			result = DbManagement.getInstance().query("SELECT * FROM tabOperation WHERE idNumClient = " + id);
 			while(result.next()) {
 				
-				operations.add(new Operation(result.getInt("idNumOperation"), result.getString("idNumCarte"), result.getString("idNumCompte"), result.getString("numMontantOpe"), result.getString("dateOpe")));
+				operations.add(new Operation(result.getInt("idNumOperation"), result.getString("idNumCarte"), result.getString("idNumCompte"), result.getString("numMontantOpe"), result.getString("datOpe")));
 			}
 		}
 		
