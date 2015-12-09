@@ -1,5 +1,9 @@
 package model;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Operation {
 
 	private int idOperation;
@@ -16,7 +20,17 @@ public class Operation {
         this.operationAmount = operationAmount;
         this.operationDate = operationDate;
     }
+    
+    public Operation() {
 
+        this.idOperation = 1;
+        this.idCard = "";
+        this.idAccount = "";
+        this.operationAmount = "";
+        this.operationDate = "";
+    }
+    
+    @XmlElement
     public int getIdOperation() {
 		return idOperation;
 	}
@@ -27,6 +41,7 @@ public class Operation {
 	}
 
 
+	@XmlElement
 	public String getIdCard() {
 		return idCard;
 	}
@@ -36,7 +51,7 @@ public class Operation {
 		this.idCard = idCard;
 	}
 
-
+	@XmlElement
 	public String getIdAccount() {
 		return idAccount;
 	}
@@ -46,7 +61,7 @@ public class Operation {
 		this.idAccount = idAccount;
 	}
 
-
+	@XmlElement
 	public String getOperationAmount() {
 		return operationAmount;
 	}
@@ -56,7 +71,7 @@ public class Operation {
 		this.operationAmount = operationAmount;
 	}
 
-
+	@XmlElement
 	public String getOperationDate() {
 		return operationDate;
 	}
