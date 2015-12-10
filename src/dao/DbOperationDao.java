@@ -23,7 +23,7 @@ public class DbOperationDao implements IOperationDao {
 	@Override
 	public List<Operation> getById(int id) throws SQLException {
 		
-		ResultSet result = DbManagement.getInstance().query("SELECT * FROM tabOperation WHERE idNumOperation = " + id);
+		ResultSet result = DbManagement.getInstance().query("SELECT * FROM tabOperation WHERE idNumCompte = " + id);
 		List<Operation> operationList = new ArrayList<>();
 		Operation operation;
 		while(result.next()) {
