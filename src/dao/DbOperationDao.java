@@ -3,6 +3,7 @@ package dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -23,16 +24,34 @@ public class DbOperationDao implements IOperationDao {
 	@Override
 	public List<Operation> getById(int id) throws SQLException {
 		
-		ResultSet result = DbManagement.getInstance().query("SELECT * FROM tabOperation WHERE idNumCompte = " + id);
-		List<Operation> operationList = new ArrayList<>();
-		Operation operation;
-		while(result.next()) {
-			
-			operation = new Operation(result.getInt("idNumOperation"), result.getString("idNumCarte"), result.getString("idNumCompte"), result.getString("numMontantOpe"), result.getString("datOpe"));
-			operationList.add(operation);
+		List<Operation> listOpe = new ArrayList<Operation>();
+		String queryString = "SELECT ope.* "+
+		  "FROM tabOperation ope "+
+		  "INNER JOIN relClientCompte cc ON cc.idNumCompte = ope.idNumCompte "+
+		  "INNER JOIN tabClient cl ON cl.idNumClient = cc.idNumClient "+
+		  "WHERE cl.idNumClient = '"+id+"' UNION "+
+		  "SELECT ope.* "+
+		  "FROM tabOperation ope "+
+		  "INNER JOIN tabCarte ca ON ca.idNumCarte = ope.idNumCarte "+
+		  "INNER JOIN tabClient cl ON cl.idNumClient = ca.idNumClient "+
+		  "WHERE cl.idNumClient = '"+id+"' " +
+		  "ORDER BY datOpe";
+		try {
+		  ResultSet rs = DbManagement.getInstance().query(queryString);
+		  while (rs.next()) {
+		    listOpe.add(new Operation(
+		    rs.getInt("idNumOperation"),
+		    rs.getString("idNumCarte"),
+		    rs.getString("idNumCompte"),
+		    rs.getString("numMontantOpe"),
+		    rs.getString("datOpe")
+		    ));
+		  }
+		} catch(SQLException e) {
+		  e.printStackTrace();
 		}
 		
-		return operationList;
+		return listOpe;
 	}
 
 	@Override
